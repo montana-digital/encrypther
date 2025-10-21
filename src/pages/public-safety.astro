@@ -1,0 +1,513 @@
+---
+/**
+ * Public Safety & Awareness Page
+ * 
+ * Comprehensive course on self-defense, situational awareness, and personal protection.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import CTA from '../components/CTA.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+---
+
+<BaseLayout
+  title="Public Safety & Awareness - EncryptHer"
+  description="Master personal safety, situational awareness, self-defense techniques, and protective strategies for everyday life."
+>
+  <!-- Hero Section -->
+  <Hero
+    title="Master Personal Safety <span class='text-primary'>& Protection</span>"
+    subtitle="Comprehensive training in situational awareness, self-defense, personal safety tools, and protective strategies for everyday life."
+    badge="Public Safety Course"
+    badgeIcon='<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
+    backgroundImage="/images/public-safety.jpg"
+    primaryCTA={{
+      text: "Enroll in Course",
+      href: "#curriculum"
+    }}
+    secondaryCTA={{
+      text: "Free Resources",
+      href: "/safety-guides"
+    }}
+  />
+
+  <!-- What You'll Learn Section -->
+  <section class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">What You'll Learn</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Build practical skills and confidence to protect yourself in any situation
+        </p>
+      </div>
+
+      <FeatureGrid columns={3}>
+        <Card
+          title="Situational Awareness"
+          description="Master threat recognition, the OODA loop, and reading your environment to stay ahead of danger"
+          iconBg="primary"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>'
+        />
+
+        <Card
+          title="Self-Defense Techniques"
+          description="Learn verbal boundaries, de-escalation tactics, and physical defense skills that work in real situations"
+          iconBg="accent"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
+        />
+
+        <Card
+          title="Personal Safety Equipment"
+          description="Proper use of pepper spray, personal alarms, tactical tools, and safety apps with legal guidance"
+          iconBg="primary"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>'
+        />
+
+        <Card
+          title="Safe Dating Practices"
+          description="Navigate online dating, first dates, and social situations safely with proven strategies"
+          iconBg="accent"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>'
+        />
+
+        <Card
+          title="Transportation Safety"
+          description="Stay safe using ride-sharing, public transit, parking lots, and walking alone"
+          iconBg="primary"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>'
+        />
+
+        <Card
+          title="Community Resources"
+          description="Build your safety network with emergency contacts, support organizations, and local resources"
+          iconBg="accent"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>'
+        />
+      </FeatureGrid>
+    </div>
+  </section>
+
+  <!-- Understanding Personal Safety Section -->
+  <section class="py-20 px-4 bg-muted/50">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Understanding Personal Safety</h2>
+        <p class="text-lg text-muted-foreground">
+          Build a foundation in awareness and self-defense philosophy
+        </p>
+      </div>
+
+      <div class="prose prose-lg max-w-none text-muted-foreground mb-8">
+        <p class="text-lg">
+          Personal safety starts with awareness and preparation. Most dangerous situations can be avoided entirely through situational awareness, understanding threat patterns, and trusting your instincts. When avoidance isn't possible, having practical self-defense skills and the right tools can make all the difference.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4 text-foreground">Core Safety Principles</h3>
+          <ul class="space-y-3 text-sm text-muted-foreground">
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Prevention First:</strong> Most dangerous situations can be avoided through awareness</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Trust Your Instincts:</strong> If something feels wrong, it probably is</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Set Boundaries:</strong> Don't worry about appearing rude when your safety is at stake</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">De-escalation Works:</strong> Words and body language can often defuse situations</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Fight to Escape:</strong> Physical defense is about getting away, not winning</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Tools Require Training:</strong> Having safety equipment is only effective with proper training</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Build Your Network:</strong> Safety is enhanced through community connections</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Know the Law:</strong> Legal regulations vary by location for self-defense tools</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-3 text-foreground">The OODA Loop Framework</h3>
+          <p class="text-sm text-muted-foreground mb-4">
+            A proven decision-making process used by law enforcement and military
+          </p>
+          <div class="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+            <div>
+              <h4 class="font-semibold text-foreground mb-2">Observe</h4>
+              <p>Continuously scan your environment for potential threats, unusual behavior, exits, and escape routes</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-foreground mb-2">Orient</h4>
+              <p>Process what you're seeing, consider context, and assess the level of potential danger</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-foreground mb-2">Decide</h4>
+              <p>Choose your course of action: avoid, create distance, de-escalate, or defend</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-foreground mb-2">Act</h4>
+              <p>Execute your decision quickly and decisively, then reassess the situation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety Tools Guide Section -->
+  <section class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Safety Tools & Equipment Guide</h2>
+        <p class="text-lg text-muted-foreground">
+          Understanding your options for personal protection
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4 text-foreground">Recommended Tools</h3>
+          <ul class="space-y-3 text-sm text-muted-foreground">
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Pepper Spray:</strong> Effective range, legal in most areas</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Personal Alarms:</strong> 120+ decibels, no training needed</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Tactical Flashlights:</strong> Disorient attackers, multi-purpose</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Safety Apps:</strong> Location sharing, emergency alerts</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Whistles:</strong> Simple, affordable, effective</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong class="text-foreground">Self-Defense Keychains:</strong> Discreet striking tools</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4 text-foreground">Tool Selection Factors</h3>
+          <ul class="space-y-3 text-sm text-muted-foreground">
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Legal Status:</strong> Check local laws before purchasing</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Training Level:</strong> Match tools to your skill and comfort</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Accessibility:</strong> Must be quickly reachable when needed</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Maintenance:</strong> Check expiration dates, test batteries</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Effectiveness Range:</strong> Understand tool limitations</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="h-5 w-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span><strong class="text-foreground">Budget:</strong> Quality tools at various price points</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-destructive/5 border border-destructive/20 rounded-lg p-6">
+        <div class="flex items-start gap-4 mb-3">
+          <svg class="h-6 w-6 text-destructive mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <h3 class="text-xl font-semibold text-foreground">Important Legal Notice</h3>
+        </div>
+        <div class="text-muted-foreground space-y-3 ml-10">
+          <p>
+            Self-defense tool laws vary dramatically by state, county, and city. Items legal in one jurisdiction may be restricted or prohibited in another. Our course covers:
+          </p>
+          <ul class="space-y-2 ml-4">
+            <li>• How to research local regulations in your area</li>
+            <li>• Legal self-defense principles and proportional force</li>
+            <li>• Documentation and reporting requirements</li>
+            <li>• Travel considerations when carrying safety tools</li>
+          </ul>
+          <p class="font-semibold text-foreground">
+            Always verify legality before purchasing or carrying any self-defense tool.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Curriculum Section -->
+  <section id="curriculum" class="py-20 px-4 bg-muted/50">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Course Curriculum</h2>
+        <p class="text-lg text-muted-foreground">
+          A comprehensive, hands-on program to build real-world safety skills
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">1</div>
+            Situational Awareness & Threat Recognition
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Develop skills to identify and avoid danger before it escalates</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• The OODA Loop decision-making framework</li>
+            <li>• Reading body language and behavioral cues</li>
+            <li>• Identifying exit routes and safe zones</li>
+            <li>• Trusting your intuition and gut feelings</li>
+            <li>• Avoiding common distractions (phone use, headphones)</li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">2</div>
+            Self-Defense Fundamentals
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Verbal, mental, and physical defense techniques that work</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• Verbal boundaries and assertive communication</li>
+            <li>• De-escalation tactics and conflict avoidance</li>
+            <li>• Basic striking techniques for vulnerable targets</li>
+            <li>• Escape techniques from common grabs</li>
+            <li>• Legal considerations and proportional force</li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">3</div>
+            Personal Safety Equipment
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Proper selection, training, and legal use of safety tools</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• Pepper spray: proper technique, range, maintenance</li>
+            <li>• Personal alarms and acoustic deterrents</li>
+            <li>• Tactical flashlights and disorientation tactics</li>
+            <li>• Self-defense keychains and striking tools</li>
+            <li>• Safety apps and digital protection</li>
+            <li>• Legal research for your jurisdiction</li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">4</div>
+            Dating & Social Safety
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Navigate social situations and relationships safely</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• Online dating safety and red flags</li>
+            <li>• First date precautions and meeting locations</li>
+            <li>• Drink safety and awareness in social settings</li>
+            <li>• Creating safety check-ins with friends</li>
+            <li>• Recognizing manipulation and coercion</li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">5</div>
+            Transportation & Public Space Safety
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Stay protected while traveling and in public areas</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• Ride-sharing safety protocols and verification</li>
+            <li>• Public transit awareness and positioning</li>
+            <li>• Parking lot and garage safety strategies</li>
+            <li>• Walking alone: routes, timing, and awareness</li>
+            <li>• Hotel and travel safety measures</li>
+          </ul>
+        </div>
+
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-2 text-foreground flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">6</div>
+            Emergency Response & Resources
+          </h3>
+          <p class="text-sm text-muted-foreground mb-3">Build your safety network and response plan</p>
+          <ul class="space-y-2 text-sm text-muted-foreground ml-11">
+            <li>• Creating emergency contact protocols</li>
+            <li>• Local and national safety resources</li>
+            <li>• Reporting incidents and documentation</li>
+            <li>• Building a personal safety network</li>
+            <li>• Post-incident support and resources</li>
+            <li>• Ongoing safety practice and skill maintenance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Frequently Asked Questions</h2>
+        <p class="text-lg text-muted-foreground">
+          Common questions about personal safety and self-defense
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group bg-card border border-border rounded-lg p-6">
+          <summary class="text-lg font-semibold cursor-pointer list-none text-foreground flex items-center justify-between">
+            What should I do if I think I'm being followed?
+            <svg class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="mt-4 text-muted-foreground space-y-3">
+            <p>If you suspect you're being followed:</p>
+            <ul class="space-y-2 ml-4">
+              <li>• Don't go home - head to a public, well-lit area with people</li>
+              <li>• Cross the street or change direction to verify</li>
+              <li>• Call someone and describe your location loudly</li>
+              <li>• Enter a business and ask staff for help</li>
+              <li>• Call 911 if the situation escalates</li>
+              <li>• Trust your instincts - it's better to be wrong than unsafe</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-lg p-6">
+          <summary class="text-lg font-semibold cursor-pointer list-none text-foreground flex items-center justify-between">
+            Is pepper spray legal everywhere?
+            <svg class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="mt-4 text-muted-foreground space-y-3">
+            <p>Pepper spray legality varies significantly by location:</p>
+            <ul class="space-y-2 ml-4">
+              <li>• Legal in most U.S. states with some restrictions</li>
+              <li>• Some states limit the size or concentration</li>
+              <li>• A few states require permits or special training</li>
+              <li>• Restricted in some cities even when state-legal</li>
+              <li>• Prohibited in many international destinations</li>
+              <li>• Always research laws in your specific jurisdiction before purchasing</li>
+            </ul>
+            <p class="mt-3">
+              Our course includes a comprehensive guide to researching local regulations.
+            </p>
+          </div>
+        </details>
+
+        <details class="group bg-card border border-border rounded-lg p-6">
+          <summary class="text-lg font-semibold cursor-pointer list-none text-foreground flex items-center justify-between">
+            Do I need to take a physical self-defense class?
+            <svg class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="mt-4 text-muted-foreground space-y-3">
+            <p>
+              While our course covers fundamental self-defense principles, we highly recommend supplementing with in-person training:
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li>• Physical practice builds muscle memory and confidence</li>
+              <li>• Instructors can correct technique in real-time</li>
+              <li>• Sparring scenarios prepare you for stress responses</li>
+              <li>• Many community centers offer affordable or free classes</li>
+              <li>• Look for women-specific self-defense programs in your area</li>
+            </ul>
+            <p class="mt-3">
+              Our course teaches you what to practice and provides resources for finding qualified instructors.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Ready to Build Your Safety Skills?"
+    description="Join thousands of women taking control of their personal safety. Enroll today and start building confidence, awareness, and practical protection skills."
+    primaryButton={{
+      text: "Enroll Now",
+      href: "#"
+    }}
+    secondaryButton={{
+      text: "View Free Resources",
+      href: "/safety-guides"
+    }}
+  />
+</BaseLayout>
+

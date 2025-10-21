@@ -52,7 +52,7 @@ const {
     {badge && (
       <div class="inline-flex items-center gap-2 bg-secondary px-4 py-2 rounded-full mb-6">
         {badgeIcon && (
-          <span class="text-primary" set:html={badgeIcon} />
+          <span class="inline-flex items-center justify-center text-primary icon-container" set:html={badgeIcon} />
         )}
         <span class="text-sm font-medium text-secondary-foreground">{badge}</span>
       </div>

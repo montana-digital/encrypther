@@ -1,0 +1,241 @@
+---
+/**
+ * Blog Page
+ * 
+ * Blog listing page with placeholder posts and categories.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import CTA from '../components/CTA.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+---
+
+<BaseLayout
+  title="Blog - Privacy Tips & Safety News"
+  description="Stay informed with the latest privacy tips, safety guides, security news, and digital rights advocacy updates from EncryptHer."
+>
+  <!-- Hero Section -->
+  <Hero
+    title="Blog & <span class='text-primary'>Resources</span>"
+    subtitle="Stay informed with the latest privacy tips, safety guides, security news, and advocacy updates to protect yourself in the digital and physical world."
+    badge="Latest Updates"
+    badgeIcon='<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>'
+    backgroundImage="/images/hero-privacy.jpg"
+  />
+
+  <!-- Blog Categories Section -->
+  <section class="py-12 px-4 bg-muted/30 border-b border-border">
+    <div class="container mx-auto max-w-6xl">
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          All Posts
+        </button>
+        <button class="px-4 py-2 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors">
+          Online Privacy
+        </button>
+        <button class="px-4 py-2 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors">
+          Travel Safety
+        </button>
+        <button class="px-4 py-2 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors">
+          Personal Safety
+        </button>
+        <button class="px-4 py-2 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors">
+          Digital Advocacy
+        </button>
+        <button class="px-4 py-2 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors">
+          News & Updates
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post Section -->
+  <section class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-4">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent mb-4">
+          Featured Post
+        </span>
+      </div>
+      
+      <div class="bg-card border border-border rounded-lg overflow-hidden hover:shadow-xl transition-all max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-0">
+          <div class="h-64 md:h-auto">
+            <img 
+              src="/images/privacy-paper.jpg" 
+              alt="Online privacy protection" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>January 15, 2025</span>
+              <span class="mx-2">•</span>
+              <span>5 min read</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-foreground">How to Remove Your Data from Major Data Broker Sites</h3>
+            <p class="text-muted-foreground mb-4">
+              A step-by-step guide to removing your personal information from Spokeo, WhitePages, BeenVerified, and other major data aggregator websites.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium">
+              Read Full Article
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section class="py-20 px-4 bg-muted/50">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Recent Posts</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Latest articles on privacy, safety, and digital rights
+        </p>
+      </div>
+
+      <FeatureGrid columns={3}>
+        <Card
+          href="#"
+          image="/images/online-security.jpg"
+          imageAlt="Online security and privacy"
+          title="Understanding CCPA: Your California Privacy Rights"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>January 10, 2025</span>
+            <span>•</span>
+            <span>4 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Learn about your rights under the California Consumer Privacy Act and how to exercise them to protect your personal data.
+          </p>
+        </Card>
+
+        <Card
+          href="#"
+          image="/images/street-awareness.jpg"
+          imageAlt="Personal safety awareness"
+          title="The OODA Loop: A Framework for Personal Safety"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>January 5, 2025</span>
+            <span>•</span>
+            <span>6 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Discover how the OODA Loop decision-making framework can enhance your situational awareness and personal safety.
+          </p>
+        </Card>
+
+        <Card
+          href="#"
+          image="/images/travel-luggage.jpg"
+          imageAlt="Travel safety"
+          title="Hotel Room Safety: Detecting Hidden Cameras"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>December 28, 2024</span>
+            <span>•</span>
+            <span>5 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Professional techniques for scanning hotel rooms and Airbnbs for hidden surveillance devices to protect your privacy.
+          </p>
+        </Card>
+
+        <Card
+          href="#"
+          image="/images/advocacy.jpg"
+          imageAlt="Digital advocacy"
+          title="Why America Needs Federal Privacy Legislation"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>December 20, 2024</span>
+            <span>•</span>
+            <span>7 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Exploring the privacy crisis in America and why comprehensive federal privacy laws are essential for protecting citizens.
+          </p>
+        </Card>
+
+        <Card
+          href="#"
+          image="/images/public-safety.jpg"
+          imageAlt="Self-defense training"
+          title="Self-Defense Basics Every Woman Should Know"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>December 15, 2024</span>
+            <span>•</span>
+            <span>8 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Essential self-defense principles, de-escalation tactics, and physical techniques that work in real-world situations.
+          </p>
+        </Card>
+
+        <Card
+          href="#"
+          image="/images/features1.jpg"
+          imageAlt="Password security"
+          title="Password Manager Guide: Choosing the Right One"
+        >
+          <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <span>December 10, 2024</span>
+            <span>•</span>
+            <span>5 min read</span>
+          </div>
+          <p class="text-sm text-muted-foreground">
+            Comparing the best password managers, understanding their security features, and tips for creating strong master passwords.
+          </p>
+        </Card>
+      </FeatureGrid>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup Section -->
+  <section class="py-20 px-4 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5">
+    <div class="container mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Never Miss an Update</h2>
+      <p class="text-lg text-muted-foreground mb-8">
+        Subscribe to our newsletter for weekly privacy tips, safety guides, and advocacy updates delivered to your inbox.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          class="flex-1 px-4 py-3 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+        <button class="px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-all whitespace-nowrap">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Want to Go Deeper?"
+    description="Our comprehensive courses provide hands-on training, practical exercises, and ongoing support to master privacy and safety skills."
+    primaryButton={{
+      text: "Explore Our Courses",
+      href: "/#courses"
+    }}
+    secondaryButton={{
+      text: "Download Free Guides",
+      href: "/safety-guides"
+    }}
+  />
+</BaseLayout>
+

@@ -1,22 +1,17 @@
 ---
 /**
- * Card Component
+ * Card Component - Clean Rebuild
  * 
- * Reusable card with optional icon, title, description, and content.
- * Supports hover effects and clickable cards.
- * 
- * LAYOUT PATTERNS:
- * - Default: Icon top-left, content flows below
- * - iconPosition="center": Icon centered at top, badge in top-right corner
- * - For advocacy/feature cards: Use iconPosition="center" for better visual hierarchy
+ * Simple, centered card component with icon, title, description.
+ * Everything is centered both vertically and horizontally.
+ * Fully responsive for mobile, tablet, and desktop.
  */
 
 interface Props {
   title?: string;
   description?: string;
   icon?: string;
-  iconColor?: 'primary' | 'accent';
-  iconPosition?: 'default' | 'center';
+  iconBg?: 'primary' | 'accent';
   href?: string;
   image?: string;
   imageAlt?: string;
@@ -28,79 +23,69 @@ const {
   title,
   description,
   icon,
-  iconColor = 'primary',
-  iconPosition = 'default',
+  iconBg = 'primary',
   href,
   image,
   imageAlt = '',
   badge,
-  class: className,
+  class: className = '',
 } = Astro.props;
 
 const CardTag = href ? 'a' : 'div';
-const cardClasses = `block border border-border rounded-lg overflow-hidden bg-card hover:shadow-lg transition-shadow ${href ? 'cursor-pointer' : ''} ${className || ''}`;
-const iconBgColor = iconColor === 'primary' ? 'bg-primary/10' : 'bg-accent/10';
-const iconTextColor = iconColor === 'primary' ? 'text-primary' : 'text-accent';
+const iconBgClass = iconBg === 'primary' ? 'bg-primary/10' : 'bg-accent/10';
+const iconColorClass = iconBg === 'primary' ? 'text-primary' : 'text-accent';
 ---
 
-<CardTag href={href} class={cardClasses}>
+<CardTag 
+  href={href}
+  class={`block bg-card border border-border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 ${href ? 'cursor-pointer hover:-translate-y-1' : ''} ${className}`}
+>
+  <!-- Image Section (if provided) -->
   {image && (
-    <div class="h-48 overflow-hidden">
+    <div class="h-48 w-full overflow-hidden">
       <img 
         src={image} 
         alt={imageAlt}
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         loading="lazy"
       />
     </div>
   )}
   
-  <div class="p-6">
-    {iconPosition === 'center' ? (
-      <!-- Centered layout: icon left, badge right, same row -->
-      <div class="flex items-start justify-between mb-4">
-        {icon && (
-          <div class={`h-12 w-12 rounded-lg ${iconBgColor} flex items-center justify-center`}>
-            <span class={iconTextColor} set:html={icon} />
-          </div>
-        )}
-        {badge && (
-          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent-foreground">
-            {badge}
-          </span>
-        )}
-      </div>
-    ) : (
-      <!-- Default layout: badge then icon, stacked vertically -->
-      <>
-        {badge && (
-          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent-foreground mb-4">
-            {badge}
-          </span>
-        )}
-        {icon && (
-          <div class={`h-12 w-12 rounded-lg ${iconBgColor} flex items-center justify-center mb-4`}>
-            <span class={iconTextColor} set:html={icon} />
-          </div>
-        )}
-      </>
+  <!-- Content Section - Everything Centered -->
+  <div class="p-6 flex flex-col items-center justify-center text-center">
+    
+    <!-- Badge (if provided) -->
+    {badge && (
+      <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent mb-4">
+        {badge}
+      </span>
     )}
     
+    <!-- Icon Box - Properly Centered -->
+    {icon && (
+      <div class={`w-14 h-14 ${iconBgClass} rounded-lg flex items-center justify-center mb-4 mx-auto`}>
+        <div class={`${iconColorClass} w-7 h-7 flex items-center justify-center`} set:html={icon} />
+      </div>
+    )}
+    
+    <!-- Title -->
     {title && (
-      <h3 class="text-xl font-semibold mb-2 text-foreground">
+      <h3 class="text-xl font-semibold mb-3 text-foreground">
         {title}
       </h3>
     )}
     
+    <!-- Description -->
     {description && (
-      <p class="text-muted-foreground text-sm mb-4">
+      <p class="text-muted-foreground mb-4">
         {description}
       </p>
     )}
     
-    <div class="text-foreground">
+    <!-- Slot for Additional Content -->
+    <div class="w-full text-center">
       <slot />
     </div>
   </div>
 </CardTag>
-

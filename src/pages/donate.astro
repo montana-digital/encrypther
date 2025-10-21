@@ -1,0 +1,163 @@
+---
+/**
+ * Donate Page
+ * 
+ * Donation tiers, impact section, and custom donation options.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import CTA from '../components/CTA.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+---
+
+<BaseLayout
+  title="Donate - Support Women's Safety & Empowerment"
+  description="Support EncryptHer's mission to provide essential safety education and resources to women who need it most. Your donation makes a difference."
+>
+  <!-- Hero Section -->
+  <Hero
+    title="Help Us Empower Women <span class='text-primary'>Everywhere</span>"
+    subtitle="Your donation helps us provide essential safety education and resources to women who need it most."
+    badge="Support Women's Safety"
+    badgeIcon='<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>'
+    backgroundImage="/images/hero-privacy.jpg"
+  />
+
+  <!-- Impact Section -->
+  <section class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Your Impact</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Every donation directly supports women's safety education and empowerment
+        </p>
+      </div>
+
+      <FeatureGrid columns={3} class="mb-16">
+        <Card
+          title="Education Programs"
+          description="Fund comprehensive safety courses covering online privacy, travel safety, and personal security"
+          iconBg="primary"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>'
+        />
+
+        <Card
+          title="Resource Development"
+          description="Support the creation of guides, tools, and materials that help women protect themselves"
+          iconBg="accent"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
+        />
+
+        <Card
+          title="Community Support"
+          description="Build safe spaces and networks where women can learn, share, and support each other"
+          iconBg="primary"
+          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>'
+        />
+      </FeatureGrid>
+
+      <!-- Donation Tiers -->
+      <div class="mb-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">Ways to Give</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Supporter Tier -->
+          <div class="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <h4 class="text-2xl font-semibold mb-2 text-foreground">Supporter</h4>
+            <div class="text-4xl font-bold text-primary mb-3">$25</div>
+            <p class="text-muted-foreground mb-6">Help us reach more women with essential safety resources</p>
+            <button class="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-all">
+              Donate $25
+            </button>
+          </div>
+
+          <!-- Advocate Tier (Popular) -->
+          <div class="bg-card border-2 border-primary rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-3 right-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
+              POPULAR
+            </div>
+            <h4 class="text-2xl font-semibold mb-2 text-foreground">Advocate</h4>
+            <div class="text-4xl font-bold text-primary mb-3">$50</div>
+            <p class="text-muted-foreground mb-6">Sponsor a complete safety course for a woman in need</p>
+            <button class="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-all">
+              Donate $50
+            </button>
+          </div>
+
+          <!-- Champion Tier -->
+          <div class="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <h4 class="text-2xl font-semibold mb-2 text-foreground">Champion</h4>
+            <div class="text-4xl font-bold text-primary mb-3">$100</div>
+            <p class="text-muted-foreground mb-6">Fund comprehensive safety education and ongoing support</p>
+            <button class="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-all">
+              Donate $100
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Amount -->
+      <div class="bg-card border border-border rounded-lg p-8 max-w-2xl mx-auto text-center">
+        <h4 class="text-xl font-semibold mb-2 text-foreground">Custom Amount</h4>
+        <p class="text-muted-foreground mb-6">Choose any amount that works for you</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <input
+            type="number"
+            placeholder="Enter amount"
+            min="1"
+            class="flex-1 px-4 py-3 rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <button class="px-8 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-all whitespace-nowrap">
+            Donate Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Donate Section -->
+  <section class="py-20 px-4 bg-muted/50">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Why Your Donation Matters</h2>
+      </div>
+      
+      <div class="space-y-6 text-muted-foreground">
+        <p class="text-lg">
+          As a nonprofit organization, EncryptHer relies on the generosity of supporters like you to continue our mission of empowering women with essential safety knowledge and resources.
+        </p>
+        <p class="text-lg">
+          Every woman deserves to feel safe—whether she's walking downtown, traveling abroad, creating online profiles, or simply living her daily life. Your donation helps us provide free or low-cost education to women who might not otherwise have access to this critical information.
+        </p>
+        <p class="text-lg">
+          Together, we're building a world where women can move through digital and physical spaces with confidence, knowledge, and the tools to protect themselves.
+        </p>
+      </div>
+
+      <div class="mt-12 p-8 bg-primary/10 rounded-lg border border-primary/20">
+        <p class="text-center text-foreground font-semibold mb-2">
+          EncryptHer is a registered nonprofit organization
+        </p>
+        <p class="text-center text-sm text-muted-foreground">
+          All donations are tax-deductible to the extent allowed by law
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Every Contribution Makes a Difference"
+    description="Your support helps us reach more women with life-changing safety education and resources."
+    primaryButton={{
+      text: "Donate Now",
+      href: "#"
+    }}
+    secondaryButton={{
+      text: "Learn More About Our Mission",
+      href: "/about"
+    }}
+  />
+</BaseLayout>
+
