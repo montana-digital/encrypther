@@ -1,0 +1,16 @@
+# Robots.txt for EncryptHer
+# Allow all search engines to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://encrypther.pages.dev/sitemap-index.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Disallow specific paths (if needed in the future)
+# Disallow: /admin/
+# Disallow: /api/
+

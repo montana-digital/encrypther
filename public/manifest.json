@@ -1,0 +1,50 @@
+{
+  "name": "EncryptHer - Your Safety, Your Privacy, Your Power",
+  "short_name": "EncryptHer",
+  "description": "EncryptHer provides essential education on online privacy, personal safety, and digital advocacy for women worldwide.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "categories": ["education", "lifestyle", "security"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/images/encrypther-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Online Privacy",
+      "short_name": "Privacy",
+      "description": "Learn about online privacy and security",
+      "url": "/online-privacy",
+      "icons": [{ "src": "/images/encrypther-logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Travel Safety",
+      "short_name": "Travel",
+      "description": "Travel safety tips for women",
+      "url": "/travel-safety",
+      "icons": [{ "src": "/images/encrypther-logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Digital Advocacy",
+      "short_name": "Advocate",
+      "description": "Join the fight for privacy rights",
+      "url": "/digital-advocacy",
+      "icons": [{ "src": "/images/encrypther-logo.png", "sizes": "192x192" }]
+    }
+  ]
+}
+

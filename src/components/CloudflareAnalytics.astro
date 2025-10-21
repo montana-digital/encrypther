@@ -1,0 +1,23 @@
+---
+/**
+ * Cloudflare Web Analytics Component
+ * 
+ * Includes Cloudflare Web Analytics beacon.
+ * Automatically enabled when deployed on Cloudflare Pages.
+ * Privacy-focused analytics with no cookies.
+ */
+
+import { analyticsConfig, shouldEnableCF } from '../config/analytics.config';
+
+const { token } = analyticsConfig.cloudflareAnalytics;
+const isEnabled = shouldEnableCF();
+---
+
+{isEnabled && token && (
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon={JSON.stringify({ token })}></script>
+)}
+
+{/* Note: If deployed on Cloudflare Pages with automatic analytics enabled,
+    the beacon script will be automatically injected and token is not required */}
+

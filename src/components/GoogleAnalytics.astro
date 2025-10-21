@@ -1,0 +1,30 @@
+---
+/**
+ * Google Analytics Component
+ * 
+ * Includes Google Analytics 4 tracking code.
+ * Only loads in production or when explicitly enabled in dev.
+ */
+
+import { analyticsConfig, shouldEnableGA } from '../config/analytics.config';
+
+const { measurementId } = analyticsConfig.googleAnalytics;
+const isEnabled = shouldEnableGA();
+---
+
+{isEnabled && (
+  <>
+    <!-- Google tag (gtag.js) -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script is:inline define:vars={{ measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', measurementId, {
+        anonymize_ip: true, // Privacy-focused: anonymize IP addresses
+        cookie_flags: 'SameSite=None;Secure'
+      });
+    </script>
+  </>
+)}
+

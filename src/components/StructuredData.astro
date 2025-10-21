@@ -1,0 +1,153 @@
+---
+/**
+ * Structured Data Component
+ * 
+ * Adds JSON-LD structured data for search engines.
+ * Helps Google understand the site and show rich results.
+ */
+
+import { seoConfig } from '../config/seo.config';
+import { getSocialMediaUrls } from '../config/social-media.config';
+
+interface Props {
+  type?: 'website' | 'article' | 'course';
+  pageTitle?: string;
+  pageDescription?: string;
+  pageUrl?: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+}
+
+const {
+  type = 'website',
+  pageTitle,
+  pageDescription,
+  pageUrl,
+  image,
+  datePublished,
+  dateModified
+} = Astro.props;
+
+const { siteName, siteUrl, defaultImage, organization } = seoConfig;
+const socialUrls = getSocialMediaUrls();
+
+// Organization Schema (for all pages)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: organization.name,
+  legalName: organization.legalName,
+  foundingDate: organization.foundingDate,
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/images/encrypther-logo.png`,
+    width: '112',
+    height: '112'
+  },
+  email: organization.email,
+  ...(organization.telephone && { telephone: organization.telephone }),
+  ...(organization.address && { address: {
+    '@type': 'PostalAddress',
+    streetAddress: organization.address.streetAddress,
+    addressLocality: organization.address.addressLocality,
+    addressRegion: organization.address.addressRegion,
+    postalCode: organization.address.postalCode,
+    addressCountry: organization.address.addressCountry
+  }}),
+  ...(socialUrls.length > 0 && { sameAs: socialUrls }),
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States'
+  },
+  knowsAbout: [
+    'Cybersecurity',
+    'Online Privacy',
+    'Personal Safety',
+    'Digital Advocacy',
+    'Data Protection',
+    'Women\'s Safety'
+  ]
+};
+
+// WebSite Schema with Search Action
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteName,
+  url: siteUrl,
+  description: pageDescription || seoConfig.defaultDescription,
+  publisher: {
+    '@type': 'Organization',
+    name: organization.name
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteUrl}/search?q={search_term_string}`
+    },
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+// Article Schema (for blog posts)
+const articleSchema = type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: pageTitle,
+  description: pageDescription,
+  image: image ? `${siteUrl}${image}` : `${siteUrl}${defaultImage}`,
+  datePublished: datePublished,
+  dateModified: dateModified || datePublished,
+  author: {
+    '@type': 'Organization',
+    name: organization.name
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: organization.name,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/images/encrypther-logo.png`
+    }
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': pageUrl || siteUrl
+  }
+} : null;
+
+// Course Schema (for educational pages)
+const courseSchema = type === 'course' ? {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: pageTitle,
+  description: pageDescription,
+  provider: {
+    '@type': 'Organization',
+    name: organization.name,
+    url: siteUrl
+  },
+  courseMode: 'online',
+  availableLanguage: 'en',
+  isAccessibleForFree: true,
+  educationalLevel: 'Beginner to Intermediate',
+  about: {
+    '@type': 'Thing',
+    name: 'Digital Safety and Privacy'
+  }
+} : null;
+
+// Combine all schemas
+const schemas = [
+  organizationSchema,
+  websiteSchema,
+  ...(articleSchema ? [articleSchema] : []),
+  ...(courseSchema ? [courseSchema] : [])
+];
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemas)} />
+
