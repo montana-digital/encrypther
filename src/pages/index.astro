@@ -1,16 +1,189 @@
 ---
+/**
+ * Homepage
+ * 
+ * Main landing page for EncryptHer with hero, what we do, courses,
+ * advocacy, and CTA sections.
+ */
 
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import CTA from '../components/CTA.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="EncryptHer - Your Safety, Your Privacy, Your Power"
+  description="EncryptHer provides essential education on online privacy, personal safety, and digital advocacy for women worldwide."
+>
+  <!-- Hero Section -->
+  <Hero
+    title="Your Safety, Your Privacy, <span class='text-primary'>Your Power</span>"
+    subtitle="EncryptHer provides essential education on online privacy, personal safety, and digital advocacy for women worldwide."
+    badge="Empowering Women Through Digital Safety"
+    badgeIcon='<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>'
+    backgroundImage="/images/hero-privacy.jpg"
+    primaryCTA={{
+      text: "Get Empowered",
+      href: "#courses"
+    }}
+  />
+
+  <!-- What We Do Section -->
+  <section id="what-we-do" class="py-20 px-4 bg-background">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">What We Do</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          EncryptHer empowers women through comprehensive educational courses and active advocacy for digital rights and privacy legislation.
+        </p>
+      </div>
+
+      <FeatureGrid columns={2} class="max-w-4xl mx-auto">
+        <Card>
+          <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-foreground">Educational Courses</h3>
+          <p class="text-muted-foreground">
+            Comprehensive courses covering online privacy, travel safety, and public awareness—designed to protect and empower you in the digital and physical world.
+          </p>
+        </Card>
+
+        <Card>
+          <div class="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-foreground">Advocacy Work</h3>
+          <p class="text-muted-foreground">
+            Active advocacy for comprehensive federal privacy legislation and stronger data protection laws to safeguard women's digital rights across America.
+          </p>
+        </Card>
+      </FeatureGrid>
+    </div>
+  </section>
+
+  <!-- Our Courses Section -->
+  <section id="courses" class="py-20 px-4 bg-muted/50">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Learn It</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Comprehensive courses designed to protect and empower you
+        </p>
+      </div>
+
+      <FeatureGrid columns={3}>
+        <Card
+          href="/online-privacy"
+          image="/images/privacy-paper.jpg"
+          imageAlt="Woman covering her face with paper representing online privacy protection"
+        >
+          <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-foreground">Online Privacy & Security</h3>
+          <p class="text-sm text-muted-foreground mb-3">
+            🛡️ 1 in 3 women experience online harassment — we're here to change that.
+          </p>
+          <p class="text-sm text-muted-foreground">
+            Learn to protect your digital footprint, secure your accounts, and maintain privacy online.
+          </p>
+        </Card>
+
+        <Card
+          href="/public-safety"
+          image="/images/street-awareness.jpg"
+          imageAlt="Woman practicing situational awareness in public urban space"
+        >
+          <div class="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-foreground">Public Safety & Awareness</h3>
+          <p class="text-sm text-muted-foreground mb-3">
+            💪 Research shows awareness and education can reduce women's risk of violence by up to 50%.
+          </p>
+          <p class="text-sm text-muted-foreground">
+            Our programs turn fear into preparedness — giving women the tools, training, and confidence to stay safe wherever they go.
+          </p>
+        </Card>
+
+        <Card
+          href="/travel-safety"
+          image="/images/travel-luggage.jpg"
+          imageAlt="Confident woman traveler with luggage practicing safe travel habits"
+        >
+          <div class="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-foreground">Travel Safety</h3>
+          <p class="text-sm text-muted-foreground mb-3">
+            ✈️ 1 in 4 female travelers say they've felt unsafe or threatened when traveling alone.
+          </p>
+          <p class="text-sm text-muted-foreground">
+            Our workshops teach women how to identify danger before it starts — from rideshare red flags to hotel security checks.
+          </p>
+        </Card>
+      </FeatureGrid>
+    </div>
+  </section>
+
+  <!-- Digital Advocacy Section -->
+  <section id="advocacy" class="py-20 px-4 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">Digital Advocacy</h2>
+        <p class="text-lg text-muted-foreground">
+          Beyond education, we're taking action to protect women's digital rights through legislative advocacy and policy reform.
+        </p>
+      </div>
+
+      <Card
+        href="/digital-advocacy"
+        image="/images/advocacy.jpg"
+        imageAlt="Diverse group of women learning about digital advocacy and rights"
+        badge="Initiative"
+      >
+        <div class="flex items-start justify-between mb-4">
+          <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+        </div>
+        <h3 class="text-2xl font-semibold mb-3 text-foreground">Join Our Advocacy Movement</h3>
+        <p class="text-base text-muted-foreground mb-4">
+          Your medical records, home address, and even dating app data can be sold legally — because the U.S. still has no national privacy law protecting you. Source: Electronic Frontier Foundation (<a href="https://www.eff.org/deeplinks/2025/08/data-brokers-are-ignoring-privacy-law-we-deserve-better" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">link</a>)
+        </p>
+        <p class="text-sm text-muted-foreground">
+          Join us in advocating for comprehensive privacy legislation and stronger data protection laws in America. Together, we can fight for the digital rights and privacy protections women deserve.
+        </p>
+      </Card>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Ready to Take Control?"
+    description="Join thousands of women who have strengthened their safety and privacy through our programs."
+    primaryButton={{
+      text: "Enroll Now",
+      href: "#courses"
+    }}
+    secondaryButton={{
+      text: "Contact Us",
+      href: "/contact"
+    }}
+  />
+</BaseLayout>
