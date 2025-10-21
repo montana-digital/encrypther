@@ -137,6 +137,8 @@ const isHomepage = currentPath === '/';
             id="mobile-menu-button"
             class="p-2 text-foreground hover:text-primary transition-colors"
             aria-label="Toggle menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -188,14 +190,58 @@ const isHomepage = currentPath === '/';
 </header>
 
 <script>
-  // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  /**
+   * Mobile menu toggle with error handling
+   * Progressive enhancement - menu works without JS
+   */
+  function initMobileMenu() {
+    try {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (!mobileMenuButton || !mobileMenu) {
+        console.warn('[Header] Mobile menu elements not found');
+        return;
+      }
+      
+      mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        
+        // Update ARIA attributes for accessibility
+        mobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (event) => {
+        const target = event.target as Node;
+        if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+        }
+      });
+      
+      // Close menu on escape key
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.focus(); // Return focus for accessibility
+        }
+      });
+    } catch (error) {
+      console.error('[Header] Error initializing mobile menu:', error);
+    }
   }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+  
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initMobileMenu);
 </script>
 

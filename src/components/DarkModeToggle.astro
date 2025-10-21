@@ -42,71 +42,147 @@ const uniqueId = Math.random().toString(36).substring(7);
 </button>
 
 <script>
-  // Theme management with localStorage persistence
-  // Supports multiple toggle instances on the same page
+  /**
+   * Theme management with error handling and accessibility
+   * 
+   * Features:
+   * - localStorage persistence
+   * - System preference detection
+   * - Cross-tab synchronization
+   * - Multiple toggle instances support
+   * - Error handling and fallbacks
+   */
   
-  const html = document.documentElement;
+  function initDarkMode() {
+    try {
+      const html = document.documentElement;
 
-  // Check for saved theme preference or default to 'light'
-  const getTheme = (): string => {
-    if (typeof localStorage !== 'undefined') {
-      const stored = localStorage.getItem('theme');
-      if (stored) return stored;
-    }
-    // Check system preference
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  };
+      // Check for saved theme preference or default to system preference
+      const getTheme = (): string => {
+        try {
+          if (typeof localStorage !== 'undefined') {
+            const stored = localStorage.getItem('theme');
+            if (stored && (stored === 'dark' || stored === 'light')) {
+              return stored;
+            }
+          }
+        } catch (error) {
+          console.warn('[DarkMode] localStorage not available:', error);
+        }
+        
+        // Check system preference
+        try {
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+          }
+        } catch (error) {
+          console.warn('[DarkMode] matchMedia not supported:', error);
+        }
+        
+        return 'light';
+      };
 
-  // Apply theme to document and update all toggle instances
-  const applyTheme = (theme: string) => {
-    const darkIcons = document.querySelectorAll('.theme-icon-dark');
-    const lightIcons = document.querySelectorAll('.theme-icon-light');
-    
-    if (theme === 'dark') {
-      html.classList.add('dark');
-      darkIcons.forEach(icon => icon.classList.remove('hidden'));
-      lightIcons.forEach(icon => icon.classList.add('hidden'));
-    } else {
-      html.classList.remove('dark');
-      lightIcons.forEach(icon => icon.classList.remove('hidden'));
-      darkIcons.forEach(icon => icon.classList.add('hidden'));
-    }
-  };
+      // Apply theme to document and update all toggle instances
+      const applyTheme = (theme: string) => {
+        try {
+          const darkIcons = document.querySelectorAll('.theme-icon-dark');
+          const lightIcons = document.querySelectorAll('.theme-icon-light');
+          const themeToggles = document.querySelectorAll('.theme-toggle');
+          
+          if (theme === 'dark') {
+            html.classList.add('dark');
+            darkIcons.forEach(icon => icon.classList.remove('hidden'));
+            lightIcons.forEach(icon => icon.classList.add('hidden'));
+            themeToggles.forEach(toggle => {
+              if (toggle instanceof HTMLElement) {
+                toggle.setAttribute('aria-label', 'Switch to light mode');
+              }
+            });
+          } else {
+            html.classList.remove('dark');
+            lightIcons.forEach(icon => icon.classList.remove('hidden'));
+            darkIcons.forEach(icon => icon.classList.add('hidden'));
+            themeToggles.forEach(toggle => {
+              if (toggle instanceof HTMLElement) {
+                toggle.setAttribute('aria-label', 'Switch to dark mode');
+              }
+            });
+          }
+        } catch (error) {
+          console.error('[DarkMode] Error applying theme:', error);
+        }
+      };
 
-  // Initialize theme on page load
-  const currentTheme = getTheme();
-  applyTheme(currentTheme);
+      // Initialize theme on page load
+      const currentTheme = getTheme();
+      applyTheme(currentTheme);
 
-  // Toggle theme on any button click
-  const themeToggles = document.querySelectorAll('.theme-toggle');
-  themeToggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const isDark = html.classList.contains('dark');
-      const newTheme = isDark ? 'light' : 'dark';
-      
-      applyTheme(newTheme);
-      
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('theme', newTheme);
+      // Toggle theme on any button click
+      const themeToggles = document.querySelectorAll('.theme-toggle');
+      themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          try {
+            const isDark = html.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            
+            applyTheme(newTheme);
+            
+            // Persist to localStorage
+            try {
+              if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('theme', newTheme);
+              }
+            } catch (error) {
+              console.warn('[DarkMode] Could not save theme preference:', error);
+            }
+          } catch (error) {
+            console.error('[DarkMode] Error toggling theme:', error);
+          }
+        });
+      });
+
+      // Listen for changes in other tabs/windows
+      try {
+        window.addEventListener('storage', (e) => {
+          if (e.key === 'theme' && e.newValue) {
+            applyTheme(e.newValue);
+          }
+        });
+      } catch (error) {
+        console.warn('[DarkMode] Could not setup cross-tab sync:', error);
       }
-    });
-  });
 
-  // Listen for changes in other tabs/windows
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'theme' && e.newValue) {
-      applyTheme(e.newValue);
-    }
-  });
+      // Listen for system theme changes
+      try {
+        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkModeQuery.addEventListener('change', (e) => {
+          try {
+            // Only follow system preference if user hasn't set a preference
+            if (!localStorage.getItem('theme')) {
+              applyTheme(e.matches ? 'dark' : 'light');
+            }
+          } catch (error) {
+            console.warn('[DarkMode] Error handling system theme change:', error);
+          }
+        });
+      } catch (error) {
+        console.warn('[DarkMode] Could not setup system theme listener:', error);
+      }
 
-  // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
+      console.info('[DarkMode] Initialized with theme:', currentTheme);
+    } catch (error) {
+      console.error('[DarkMode] Error initializing dark mode:', error);
     }
-  });
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDarkMode);
+  } else {
+    initDarkMode();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initDarkMode);
 </script>
 
