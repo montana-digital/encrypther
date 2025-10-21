@@ -4,6 +4,11 @@
  * 
  * Reusable card with optional icon, title, description, and content.
  * Supports hover effects and clickable cards.
+ * 
+ * LAYOUT PATTERNS:
+ * - Default: Icon top-left, content flows below
+ * - iconPosition="center": Icon centered at top, badge in top-right corner
+ * - For advocacy/feature cards: Use iconPosition="center" for better visual hierarchy
  */
 
 interface Props {
@@ -11,6 +16,7 @@ interface Props {
   description?: string;
   icon?: string;
   iconColor?: 'primary' | 'accent';
+  iconPosition?: 'default' | 'center';
   href?: string;
   image?: string;
   imageAlt?: string;
@@ -23,6 +29,7 @@ const {
   description,
   icon,
   iconColor = 'primary',
+  iconPosition = 'default',
   href,
   image,
   imageAlt = '',
@@ -32,6 +39,8 @@ const {
 
 const CardTag = href ? 'a' : 'div';
 const cardClasses = `block border border-border rounded-lg overflow-hidden bg-card hover:shadow-lg transition-shadow ${href ? 'cursor-pointer' : ''} ${className || ''}`;
+const iconBgColor = iconColor === 'primary' ? 'bg-primary/10' : 'bg-accent/10';
+const iconTextColor = iconColor === 'primary' ? 'text-primary' : 'text-accent';
 ---
 
 <CardTag href={href} class={cardClasses}>
@@ -47,16 +56,34 @@ const cardClasses = `block border border-border rounded-lg overflow-hidden bg-ca
   )}
   
   <div class="p-6">
-    {badge && (
-      <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent-foreground mb-4">
-        {badge}
-      </span>
-    )}
-    
-    {icon && (
-      <div class={`h-12 w-12 rounded-full bg-${iconColor}/10 flex items-center justify-center mb-4`}>
-        <span class={`text-${iconColor}`} set:html={icon} />
+    {iconPosition === 'center' ? (
+      <!-- Centered layout: icon left, badge right, same row -->
+      <div class="flex items-start justify-between mb-4">
+        {icon && (
+          <div class={`h-12 w-12 rounded-lg ${iconBgColor} flex items-center justify-center`}>
+            <span class={iconTextColor} set:html={icon} />
+          </div>
+        )}
+        {badge && (
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent-foreground">
+            {badge}
+          </span>
+        )}
       </div>
+    ) : (
+      <!-- Default layout: badge then icon, stacked vertically -->
+      <>
+        {badge && (
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent-foreground mb-4">
+            {badge}
+          </span>
+        )}
+        {icon && (
+          <div class={`h-12 w-12 rounded-lg ${iconBgColor} flex items-center justify-center mb-4`}>
+            <span class={iconTextColor} set:html={icon} />
+          </div>
+        )}
+      </>
     )}
     
     {title && (
