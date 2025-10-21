@@ -6,12 +6,15 @@
  * title, subtitle, and CTA buttons.
  */
 
+import GlitchText from './GlitchText.astro';
+
 interface Props {
   title: string;
   subtitle?: string;
   badge?: string;
   badgeIcon?: string;
   backgroundImage?: string;
+  glitchEffect?: boolean | 'subtle';
   primaryCTA?: {
     text: string;
     href: string;
@@ -28,9 +31,12 @@ const {
   badge,
   badgeIcon,
   backgroundImage,
+  glitchEffect = false,
   primaryCTA,
   secondaryCTA,
 } = Astro.props;
+
+const animationType = glitchEffect === 'subtle' ? 'text-subtle' : 'text';
 ---
 
 <section class="relative py-20 px-4 overflow-hidden">
@@ -58,10 +64,20 @@ const {
       </div>
     )}
     
-    <h1 
-      class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 text-foreground leading-tight tracking-tight"
-      set:html={title}
-    />
+    {glitchEffect ? (
+      <GlitchText 
+        element="h1" 
+        class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 text-foreground leading-tight tracking-tight"
+        animationType={animationType}
+      >
+        <span set:html={title} />
+      </GlitchText>
+    ) : (
+      <h1 
+        class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 text-foreground leading-tight tracking-tight"
+        set:html={title}
+      />
+    )}
     
     {subtitle && (
       <p class="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">

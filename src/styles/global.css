@@ -97,14 +97,28 @@
     @apply border-border;
   }
 
+  /* Smooth theme transitions */
+  html {
+    scroll-behavior: smooth;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -132,6 +146,205 @@
   /* Backdrop blur for navigation */
   .backdrop-blur-nav {
     backdrop-filter: blur(12px);
+  }
+}
+
+/* Matrix/Terminal Decode Effect Animations */
+@keyframes terminal-decode {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 5px #00ff41;
+    letter-spacing: 0.15em;
+    filter: blur(1px);
+  }
+  25% {
+    opacity: 1;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 3px #00ff41;
+    letter-spacing: 0.1em;
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 1;
+    color: #00cc33;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 2px #00cc33;
+    letter-spacing: 0.05em;
+    filter: blur(0.3px);
+  }
+  70% {
+    opacity: 1;
+    color: hsl(var(--foreground));
+    letter-spacing: normal;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    color: hsl(var(--foreground));
+    letter-spacing: normal;
+    filter: none;
+    text-shadow: none;
+  }
+}
+
+@keyframes logo-materialize {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: brightness(0) saturate(0) blur(2px);
+  }
+  20% {
+    opacity: 0.7;
+    transform: scale(0.97);
+    filter: brightness(1.5) saturate(2) hue-rotate(60deg) blur(1.5px);
+  }
+  40% {
+    opacity: 0.85;
+    transform: scale(1.02);
+    filter: brightness(1.3) saturate(1.5) hue-rotate(30deg) blur(1px);
+  }
+  60% {
+    opacity: 0.95;
+    transform: scale(0.99);
+    filter: brightness(1.15) saturate(1.2) hue-rotate(15deg) blur(0.5px);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.01);
+    filter: brightness(1.05) saturate(1.1) blur(0.2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+@keyframes text-glitch-flicker {
+  0%, 5%, 10%, 15%, 20%, 25%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  2%, 7%, 12%, 17%, 22% {
+    opacity: 0.85;
+    transform: translateX(-1px);
+  }
+  4%, 9%, 14%, 19%, 24% {
+    opacity: 0.9;
+    transform: translateX(1px);
+  }
+}
+
+@keyframes terminal-decode-subtle {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.98;
+    color: #00ff41;
+    text-shadow: 0 0 1px rgba(0, 255, 65, 0.3);
+    letter-spacing: 0.015em;
+    filter: blur(0.1px);
+  }
+  50% {
+    opacity: 1;
+    color: #00cc33;
+    text-shadow: 0 0 0.5px rgba(0, 204, 51, 0.2);
+    letter-spacing: 0.005em;
+    filter: blur(0.05px);
+  }
+  80% {
+    opacity: 1;
+    color: hsl(var(--foreground));
+    letter-spacing: normal;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    color: hsl(var(--foreground));
+    letter-spacing: normal;
+    filter: none;
+    text-shadow: none;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Matrix/Terminal decode animation classes */
+.glitch-animate-text {
+  animation: 
+    terminal-decode 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    text-glitch-flicker 0.4s 1.8s ease-in-out forwards;
+  will-change: transform, opacity, color, letter-spacing, filter, text-shadow;
+}
+
+.glitch-animate-text-subtle {
+  animation: 
+    terminal-decode-subtle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, filter;
+}
+
+.glitch-animate-logo {
+  animation: logo-materialize 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+/* Fallback animations (no JS) */
+.glitch-fallback {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Scroll-triggered animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dark mode adjustments for terminal effect */
+.dark .glitch-animate-text {
+  /* Brighter green for dark mode visibility */
+  --terminal-green: #00ff41;
+}
+
+:root {
+  --terminal-green: #00cc33;
+}
+
+/* Respect reduced motion for all animations */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-animate-text,
+  .glitch-animate-logo,
+  .glitch-fallback,
+  .scroll-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

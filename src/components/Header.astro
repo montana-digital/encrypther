@@ -6,7 +6,11 @@
  * Matches the original EncryptHer design with backdrop blur and transparency.
  */
 
+import DarkModeToggle from './DarkModeToggle.astro';
+import GlitchText from './GlitchText.astro';
+
 const currentPath = Astro.url.pathname;
+const isHomepage = currentPath === '/';
 ---
 
 <header class="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -17,14 +21,29 @@ const currentPath = Astro.url.pathname;
         <!-- Left Column: Logo and Brand -->
         <div class="flex items-center justify-start">
           <a href="/" class="flex items-center gap-0 hover:opacity-80 transition-opacity">
-            <img 
-              src="/images/encrypther-logo.png" 
-              alt="EncryptHer logo" 
-              class="h-28 w-28 object-cover -mr-2"
-              width="112"
-              height="112"
-            />
-            <h1 class="text-2xl font-bold text-foreground whitespace-nowrap">EncryptHer</h1>
+            {isHomepage ? (
+              <GlitchText element="div" class="flex items-center gap-0" animationType="logo">
+                <img 
+                  src="/images/encrypther-logo.png" 
+                  alt="EncryptHer logo" 
+                  class="h-28 w-28 object-cover -mr-2"
+                  width="112"
+                  height="112"
+                />
+                <h1 class="text-2xl font-bold text-foreground whitespace-nowrap">EncryptHer</h1>
+              </GlitchText>
+            ) : (
+              <>
+                <img 
+                  src="/images/encrypther-logo.png" 
+                  alt="EncryptHer logo" 
+                  class="h-28 w-28 object-cover -mr-2"
+                  width="112"
+                  height="112"
+                />
+                <h1 class="text-2xl font-bold text-foreground whitespace-nowrap">EncryptHer</h1>
+              </>
+            )}
           </a>
         </div>
 
@@ -100,8 +119,9 @@ const currentPath = Astro.url.pathname;
           </a>
         </nav>
 
-        <!-- Right Column: Donate Button -->
-        <div class="hidden lg:flex items-center justify-end">
+        <!-- Right Column: Dark Mode Toggle & Donate Button -->
+        <div class="hidden lg:flex items-center justify-end gap-2">
+          <DarkModeToggle />
           <a 
             href="/donate"
             class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
@@ -110,8 +130,9 @@ const currentPath = Astro.url.pathname;
           </a>
         </div>
 
-        <!-- Mobile Menu Button (Only shows on small screens) -->
-        <div class="lg:hidden col-span-2 flex items-center justify-end">
+        <!-- Mobile Menu Button & Dark Mode (Only shows on small screens) -->
+        <div class="lg:hidden col-span-2 flex items-center justify-end gap-2">
+          <DarkModeToggle />
           <button 
             id="mobile-menu-button"
             class="p-2 text-foreground hover:text-primary transition-colors"

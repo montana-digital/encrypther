@@ -1,0 +1,187 @@
+---
+/**
+ * Glitch Text Component
+ * 
+ * Wrapper component that applies glitch effect animation on initial page load.
+ * Progressive enhancement: Falls back to simple fade-in without JavaScript.
+ * 
+ * Props:
+ * - element: HTML element to render (default: 'div')
+ * - class: Additional CSS classes
+ * - animationType: 'text' or 'logo' (default: 'text')
+ */
+
+interface Props {
+  element?: string;
+  class?: string;
+  animationType?: 'text' | 'logo' | 'text-subtle';
+}
+
+const { 
+  element = 'div', 
+  class: className = '',
+  animationType = 'text'
+} = Astro.props;
+
+const Element = element as any;
+const fallbackClass = 'glitch-fallback';
+const glitchClass = animationType === 'logo' ? 'glitch-animate-logo' : 
+                    animationType === 'text-subtle' ? 'glitch-animate-text-subtle' :
+                    'glitch-animate-text';
+---
+
+<Element 
+  class:list={[className, fallbackClass]} 
+  data-glitch-type={animationType}
+>
+  <slot />
+</Element>
+
+<script>
+  /**
+   * Matrix/Terminal Decode Effect Controller
+   * 
+   * Creates a dramatic "decoding" animation where text appears to materialize
+   * from scrambled terminal characters (Matrix-style).
+   * Uses sessionStorage to ensure animation only plays once per session.
+   */
+  
+  // Characters to use for scrambling effect
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+  
+  function scrambleText(element: HTMLElement, finalText: string, duration: number = 2000) {
+    const originalText = finalText;
+    const textLength = originalText.length;
+    let frame = 0;
+    const totalFrames = duration / 50; // 50ms intervals
+    
+    const interval = setInterval(() => {
+      frame++;
+      const progress = frame / totalFrames;
+      
+      // Gradually reveal more characters
+      const revealIndex = Math.floor(progress * textLength);
+      
+      let scrambledText = '';
+      for (let i = 0; i < textLength; i++) {
+        if (i < revealIndex) {
+          // Already decoded
+          scrambledText += originalText[i];
+        } else if (originalText[i] === ' ') {
+          // Keep spaces as spaces
+          scrambledText += ' ';
+        } else if (originalText[i] === '<' || originalText[i] === '>') {
+          // Keep HTML tags intact
+          scrambledText += originalText[i];
+        } else {
+          // Still scrambling
+          scrambledText += CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      }
+      
+      element.textContent = scrambledText;
+      
+      if (frame >= totalFrames) {
+        clearInterval(interval);
+        element.textContent = originalText;
+      }
+    }, 50);
+  }
+  
+  // Run on every page load (removed sessionStorage check)
+  document.addEventListener('DOMContentLoaded', () => {
+    // Find all glitch elements
+    const glitchElements = document.querySelectorAll('[data-glitch-type]');
+    
+    glitchElements.forEach((element) => {
+      const type = element.getAttribute('data-glitch-type');
+      const animationClass = type === 'logo' ? 'glitch-animate-logo' : 
+                            type === 'text-subtle' ? 'glitch-animate-text-subtle' :
+                            'glitch-animate-text';
+      
+      // Remove fallback class and add glitch animation
+      element.classList.remove('glitch-fallback');
+      element.classList.add(animationClass);
+      
+      // For full text animation, add scrambling effect
+      if (type === 'text') {
+        const textElement = (element.querySelector('span') || element) as HTMLElement;
+        const originalHTML = textElement.innerHTML;
+        const originalText = textElement.textContent || '';
+        
+        // Start scrambling immediately
+        scrambleText(textElement, originalText, 1500);
+        
+        // After scramble completes, restore HTML (for colored text)
+        setTimeout(() => {
+          textElement.innerHTML = originalHTML;
+        }, 1500);
+      }
+      
+      // For subtle text, add lighter scrambling effect
+      if (type === 'text-subtle') {
+        const textElement = (element.querySelector('span') || element) as HTMLElement;
+        const originalHTML = textElement.innerHTML;
+        const originalText = textElement.textContent || '';
+        
+        // Very short scramble duration for subtle effect
+        scrambleText(textElement, originalText, 600);
+        
+        setTimeout(() => {
+          textElement.innerHTML = originalHTML;
+        }, 600);
+      }
+      
+      // Remove animation class after it completes to free up resources
+      const duration = type === 'text-subtle' ? 1500 : 2500;
+      setTimeout(() => {
+        element.classList.remove(animationClass);
+      }, duration);
+    });
+  });
+
+  // Handle Astro view transitions (if enabled in the future)
+  document.addEventListener('astro:page-load', () => {
+    const glitchElements = document.querySelectorAll('[data-glitch-type]');
+    
+    glitchElements.forEach((element) => {
+      const type = element.getAttribute('data-glitch-type');
+      const animationClass = type === 'logo' ? 'glitch-animate-logo' : 
+                            type === 'text-subtle' ? 'glitch-animate-text-subtle' :
+                            'glitch-animate-text';
+      
+      element.classList.remove('glitch-fallback');
+      element.classList.add(animationClass);
+      
+      if (type === 'text') {
+        const textElement = (element.querySelector('span') || element) as HTMLElement;
+        const originalHTML = textElement.innerHTML;
+        const originalText = textElement.textContent || '';
+        
+        scrambleText(textElement, originalText, 1500);
+        
+        setTimeout(() => {
+          textElement.innerHTML = originalHTML;
+        }, 1500);
+      }
+      
+      if (type === 'text-subtle') {
+        const textElement = (element.querySelector('span') || element) as HTMLElement;
+        const originalHTML = textElement.innerHTML;
+        const originalText = textElement.textContent || '';
+        
+        scrambleText(textElement, originalText, 600);
+        
+        setTimeout(() => {
+          textElement.innerHTML = originalHTML;
+        }, 600);
+      }
+      
+      const duration = type === 'text-subtle' ? 1500 : 2500;
+      setTimeout(() => {
+        element.classList.remove(animationClass);
+      }, duration);
+    });
+  });
+</script>
+
