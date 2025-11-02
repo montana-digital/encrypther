@@ -6,43 +6,65 @@ Comprehensive testing suite for UI/UX validation, accessibility, performance, SE
 
 ```
 tests/
-├── e2e/              # End-to-end user flow tests
-├── accessibility/    # WCAG 2.1 AA compliance tests
-├── performance/      # Core Web Vitals and performance tests
-├── seo/             # SEO meta tags and structured data tests
-├── visual/          # Visual regression and screenshot tests
-├── utils/           # Test helper utilities
+├── e2e/              # End-to-end user flow tests (Playwright)
+├── accessibility/    # WCAG 2.1 AA compliance tests (Playwright)
+├── performance/      # Core Web Vitals and performance tests (Playwright)
+├── seo/             # SEO meta tags and structured data tests (Playwright)
+├── visual/          # Visual regression and screenshot tests (Playwright)
+├── unit/            # Unit test utilities
+│   └── utils/       # Unit test helper functions
+├── utils/           # E2E test helper utilities
 └── fixtures/        # Test data and constants
+
+src/
+├── config/
+│   └── __tests__/   # Unit tests for config files (Vitest)
+└── scripts/
+    └── __tests__/   # Unit tests for utility scripts (Vitest)
 ```
 
 ## Quick Start
 
 ### Prerequisites
 
-1. Build the site first:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. For E2E tests, build the site first:
    ```bash
    npm run build
    ```
 
-2. Install Playwright browsers (if not already installed):
+3. Install Playwright browsers (if not already installed):
    ```bash
    npx playwright install
    ```
 
 ### Running Tests
 
-**Run all tests:**
+**Run all tests (unit + E2E):**
 ```bash
 npm run test
 ```
 
-**Run specific test suites:**
+**Unit Tests (Vitest):**
+```bash
+npm run test:unit          # Run unit tests once
+npm run test:unit:watch    # Run unit tests in watch mode
+npm run test:unit:ui       # Run unit tests with UI
+npm run test:unit:coverage # Run with coverage report
+```
+
+**E2E Tests (Playwright):**
 ```bash
 npm run test:e2e          # E2E tests only
 npm run test:a11y         # Accessibility tests
 npm run test:performance  # Performance tests
 npm run test:seo          # SEO tests
 npm run test:visual       # Visual regression tests
+npm run test:all          # Run all unit + E2E tests
 ```
 
 **Interactive mode (UI):**
@@ -61,6 +83,25 @@ npm run test:headed
 ```
 
 ## Test Categories
+
+### Unit Tests (`src/**/__tests__/`)
+
+Fast, isolated tests for TypeScript utilities and configurations using Vitest.
+
+#### Config Tests
+- **`src/config/__tests__/seo.config.test.ts`** - SEO configuration validation
+- **`src/config/__tests__/analytics.config.test.ts`** - Analytics configuration validation
+
+#### Utility Script Tests
+- **`src/scripts/__tests__/performance-monitor.test.ts`** - Performance monitoring utilities
+- **`src/scripts/__tests__/prefetch.test.ts`** - Link prefetching functionality
+
+**Unit Test Features:**
+- Fast execution (< 1 second for all unit tests)
+- Test individual functions and configurations
+- No browser required (uses happy-dom for DOM APIs)
+- Type-safe with TypeScript
+- Mock browser APIs for testing
 
 ### E2E Tests (`tests/e2e/`)
 
@@ -99,6 +140,24 @@ npm run test:headed
 
 ## Writing New Tests
 
+### Example Unit Test
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { myFunction } from '../my-module';
+
+describe('myFunction', () => {
+  it('should return expected value', () => {
+    const result = myFunction('input');
+    expect(result).toBe('expected-output');
+  });
+
+  it('should handle edge cases', () => {
+    expect(() => myFunction('')).not.toThrow();
+  });
+});
+```
+
 ### Example E2E Test
 
 ```typescript
@@ -128,7 +187,7 @@ test('my page should be accessible', async ({ page }) => {
 
 ## Test Utilities
 
-Located in `tests/utils/test-helpers.ts`:
+### E2E Test Helpers (`tests/utils/test-helpers.ts`)
 
 - `navigateToPage()` - Navigate with retry logic
 - `waitForHydration()` - Wait for Astro hydration
@@ -136,6 +195,14 @@ Located in `tests/utils/test-helpers.ts`:
 - `getPerformanceMetrics()` - Get Core Web Vitals
 - `takeScreenshot()` - Capture screenshots
 - `assertPerformanceBudget()` - Assert performance thresholds
+
+### Unit Test Helpers (`tests/unit/utils/test-helpers.ts`)
+
+- `createMockURL()` - Create mock URL objects
+- `createMockElement()` - Create mock DOM elements
+- `mockConsole()` - Mock console methods for testing
+- `waitFor()` - Wait for async operations
+- `createMockConfig()` - Create mock configuration objects
 
 ## CI/CD Integration
 
@@ -169,6 +236,12 @@ Test reports are generated and uploaded as artifacts.
    ```
 
 ## Test Coverage
+
+### Unit Tests
+- ✅ Config validation (SEO, Analytics)
+- ✅ Utility function testing (performance monitor, prefetch)
+- ✅ Type safety validation
+- ✅ Error handling
 
 ### Critical User Flows
 - ✅ Navigation (header, footer, mobile menu)
@@ -223,8 +296,28 @@ Test reports are generated and uploaded as artifacts.
 - Review performance budgets
 - Optimize slow pages
 
+## Test Architecture
+
+This project follows the **Test Pyramid** strategy:
+
+1. **Unit Tests (Vitest)** - Fast, isolated tests for utilities and configs
+   - Located in `src/**/__tests__/`
+   - Run in milliseconds
+   - Test business logic, configurations, and utilities
+
+2. **E2E Tests (Playwright)** - Integration tests through browser
+   - Located in `tests/`
+   - Run in seconds
+   - Test user workflows and UI behavior
+
+**Why Both?**
+- Unit tests catch bugs quickly during development
+- E2E tests validate the complete user experience
+- Together they provide comprehensive coverage
+
 ## Resources
 
+- [Vitest Documentation](https://vitest.dev)
 - [Playwright Documentation](https://playwright.dev)
 - [axe-core Documentation](https://github.com/dequelabs/axe-core)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)

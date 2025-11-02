@@ -1,0 +1,146 @@
+---
+/**
+ * Coming Soon / Under Construction Page
+ * 
+ * Animated ASCII art crane with moving arm.
+ * Used for pages that are under development.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Coming Soon - EncryptHer"
+  description="We're building something amazing. This page is under construction and will be available soon."
+  structuredDataType="website"
+>
+  <main class="min-h-screen flex items-center justify-center px-4 py-20 bg-background">
+    <div class="container mx-auto max-w-4xl text-center">
+      <!-- ASCII Loading Bar Animation -->
+      <div class="mb-8 flex justify-center">
+        <pre 
+          id="loading-bar"
+          class="text-primary font-mono text-base sm:text-lg md:text-xl whitespace-pre leading-tight text-center"
+          style="font-family: 'Courier New', monospace; min-height: 100px; display: flex; align-items: center; justify-content: center;"
+        ></pre>
+      </div>
+
+      <!-- Message -->
+      <div class="space-y-6">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-4">
+          Under Construction
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          We're working hard to bring you something amazing. This page will be available soon!
+        </p>
+        <p class="text-lg text-muted-foreground">
+          Check back later or <a href="/contact" class="text-primary hover:underline">contact us</a> for updates.
+        </p>
+        
+        <!-- Navigation Links -->
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+          <a 
+            href="/"
+            class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Go Home
+          </a>
+          <a 
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-md border border-border bg-card px-6 py-3 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  /**
+   * Animated ASCII Loading Bar
+   * Simple, clean loading bar animation
+   */
+  
+  const barWidth = 40;
+  let currentProgress = 0;
+  let animationInterval: number | null = null;
+
+  function updateLoadingBar() {
+    const loadingElement = document.getElementById('loading-bar');
+    if (!loadingElement) return;
+
+    // Fill bar based on progress
+    const filled = Math.floor((currentProgress / 100) * barWidth);
+    const empty = barWidth - filled;
+    
+    const bar = '[' + '='.repeat(filled) + ' '.repeat(empty) + ']';
+    const percentage = Math.min(currentProgress, 100).toString().padStart(3, ' ');
+    
+    loadingElement.textContent = `${bar}\n  ${percentage}%`;
+    
+    // Increment progress
+    currentProgress += 2;
+    
+    // Reset when complete
+    if (currentProgress > 100) {
+      currentProgress = 0;
+    }
+  }
+
+  function startAnimation() {
+    // Initial frame
+    updateLoadingBar();
+    
+    // Animate every 100ms for smooth progress
+    animationInterval = window.setInterval(updateLoadingBar, 100);
+  }
+
+  function stopAnimation() {
+    if (animationInterval !== null) {
+      clearInterval(animationInterval);
+      animationInterval = null;
+    }
+  }
+
+  // Start animation when page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startAnimation);
+  } else {
+    startAnimation();
+  }
+
+  // Stop animation when page is hidden (performance optimization)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+  });
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    stopAnimation();
+    currentProgress = 0;
+    startAnimation();
+  });
+</script>
+
+<style>
+  #loading-bar {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    letter-spacing: 1px;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    #loading-bar {
+      animation: none !important;
+    }
+  }
+</style>
