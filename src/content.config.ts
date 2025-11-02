@@ -53,6 +53,14 @@ const cardSchema = z.object({
   content: z.string().optional(), // Additional markdown content
 }).optional();
 
+// CTA section schema
+const ctaSectionSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  primaryButton: ctaSchema,
+  secondaryButton: ctaSchema.optional(),
+}).optional();
+
 // Main content schema for pages
 const pageContentSchema = z.object({
   // Hero section data
@@ -70,6 +78,9 @@ const pageContentSchema = z.object({
   
   // Optional: Cards/features data (for sections with structured components)
   cards: z.array(cardSchema).optional(),
+  
+  // Optional: CTA section data
+  cta: ctaSectionSchema,
   
   // Legacy fields (kept for backward compatibility during migration)
   enabled: z.boolean().default(true),

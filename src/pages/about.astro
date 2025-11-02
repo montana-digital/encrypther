@@ -3,93 +3,78 @@
  * About Page
  * 
  * Information about EncryptHer's mission, founder, and core values.
+ * Content is managed in src/content/about.md
  */
 
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Card from '../components/Card.astro';
 import CTA from '../components/CTA.astro';
 import FeatureGrid from '../components/sections/FeatureGrid.astro';
+
+// Load content from markdown
+const pageContent = await getEntry('about', 'about');
+const { Content } = await pageContent.render();
+const { hero, seo, structuredDataType, lastModified, cards, cta } = pageContent.data;
+
+// Format dateModified for BaseLayout
+const dateModifiedStr = lastModified?.toISOString().split('T')[0];
 ---
 
 <BaseLayout
-  title="About EncryptHer - Our Mission & Values"
-  description="Learn about EncryptHer's mission to empower women through cybersecurity education, privacy awareness, and practical safety training. Founded by cybersecurity analyst Anastasiya."
-  structuredDataType="website"
+  title={seo.title}
+  description={seo.description}
+  structuredDataType={structuredDataType}
+  dateModified={dateModifiedStr}
 >
   <!-- Hero Section -->
   <Hero
-    title="About EncryptHer"
-    subtitle="Born from personal experience, built for women's empowerment"
-    badge="Our Mission"
-    badgeIcon='<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>'
-    backgroundImage="/images/hero-privacy.jpg"
-    glitchEffect="subtle"
+    title={hero.title}
+    subtitle={hero.subtitle}
+    badge={hero.badge}
+    badgeIcon={hero.badgeIcon}
+    backgroundImage={hero.backgroundImage}
+    glitchEffect={hero.glitchEffect}
   />
 
   <!-- Our Mission Section -->
   <section class="py-20 px-4 bg-background">
     <div class="container mx-auto max-w-4xl">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-foreground">Our Mission</h2>
-        <div class="space-y-6 text-muted-foreground leading-relaxed text-xl max-w-3xl mx-auto text-center">
-          <p>In a world where personal data has become a form of currency, EncryptHer exists to help women reclaim their digital power. We teach women how to protect themselves online and offline — from removing personal information off the internet, to building real-world situational awareness and digital confidence.</p>
-          
-          <p>Founded by cybersecurity analyst Anastasiya, EncryptHer bridges the gap between cybersecurity education, personal safety, and empowerment. We're here to make sure no woman ever feels exposed, unprotected, or powerless in the digital age.</p>
-          
-          <p>Our mission is to empower women through cybersecurity education, privacy awareness, and practical safety training — giving every woman the tools to protect her identity, her reputation, and her life.</p>
-          
-          <p>We provide digital privacy training, cyber safety workshops, and real-world safety skills through partnerships with law enforcement and security experts. We also build a supportive community of tech-savvy women who share knowledge, resources, and confidence to navigate today's digital world.</p>
-          
-          <p>Every day, women are targeted online — from harassment and stalking to scams and doxxing. EncryptHer exists to turn fear into skill, vulnerability into confidence, and silence into empowerment.</p>
-          
-          <p class="font-semibold text-foreground text-xl">Knowledge is protection, and protection is power. Together, we're creating a world where women don't just survive the digital landscape — they dominate it.</p>
-        </div>
+        <article class="prose prose-lg max-w-none text-center">
+          <Content />
+        </article>
       </div>
     </div>
   </section>
 
   <!-- Core Values Section -->
-  <section class="py-20 px-4 bg-muted/50">
-    <div class="container mx-auto max-w-6xl">
-      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-foreground">Our Core Values</h2>
-      <FeatureGrid columns={3}>
-        <Card
-          title="Advocacy"
-          description="Fighting for women's digital rights and privacy protection through education and awareness"
-          iconBg="primary"
-          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />'
-        />
-
-        <Card
-          title="Awareness"
-          description="Raising consciousness about both digital threats and physical safety concerns women face daily"
-          iconBg="accent"
-          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>'
-        />
-
-        <Card
-          title="Education"
-          description="Providing practical skills and actionable knowledge for digital safety and real-world protection"
-          iconBg="primary"
-          icon='<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>'
-        />
-      </FeatureGrid>
-    </div>
-  </section>
+  {cards && cards.length > 0 && (
+    <section class="py-20 px-4 bg-muted/50">
+      <div class="container mx-auto max-w-6xl">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-foreground">Our Core Values</h2>
+        <FeatureGrid columns={3}>
+          {cards.map((card) => (
+            <Card
+              title={card.title}
+              description={card.description}
+              iconBg={card.iconBg}
+              icon={card.icon}
+            />
+          ))}
+        </FeatureGrid>
+      </div>
+    </section>
+  )}
 
   <!-- CTA Section -->
-  <CTA
-    title="Ready to Take Control?"
-    description="Join thousands of women who have strengthened their safety and privacy through our programs."
-    primaryButton={{
-      text: "Explore Our Courses",
-      href: "/#courses"
-    }}
-    secondaryButton={{
-      text: "Contact Us",
-      href: "/contact"
-    }}
-  />
+  {cta && (
+    <CTA
+      title={cta.title}
+      description={cta.description}
+      primaryButton={cta.primaryButton}
+      secondaryButton={cta.secondaryButton}
+    />
+  )}
 </BaseLayout>
-
