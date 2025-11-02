@@ -44,6 +44,23 @@ cards:
     iconBg: "accent"
     icon: '<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>'
     content: "✈️ 1 in 4 female travelers say they've felt unsafe or threatened when traveling alone.\n\nOur workshops teach women how to identify danger before it starts — from rideshare red flags to hotel security checks."
+advocacy:
+  image: "/images/advocacy.jpg"
+  imageAlt: "Diverse group of women learning about digital advocacy and rights"
+  badge: "Initiative"
+  icon: '<svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
+  title: "Join Our Advocacy Movement"
+  paragraph1: "Your medical records, home address, and even dating app data can be sold legally — because the U.S. still has no national privacy law protecting you. Source: <a href=\"https://www.eff.org/deeplinks/2025/08/data-brokers-are-ignoring-privacy-law-we-deserve-better\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-primary hover:underline\">Electronic Frontier Foundation</a>"
+  paragraph2: "Join us in advocating for comprehensive privacy legislation and stronger data protection laws in America. Together, we can fight for the digital rights and privacy protections women deserve."
+cta:
+  title: "Ready to Take Control?"
+  description: "Join thousands of women who have strengthened their safety and privacy through our programs."
+  primaryButton:
+    text: "Enroll Now"
+    href: "#courses"
+  secondaryButton:
+    text: "Contact Us"
+    href: "/contact"
 ---
 
 <!-- section:what-we-do -->

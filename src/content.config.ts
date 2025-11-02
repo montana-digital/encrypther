@@ -53,6 +53,17 @@ const cardSchema = z.object({
   content: z.string().optional(), // Additional markdown content
 }).optional();
 
+// Advocacy section schema
+const advocacySchema = z.object({
+  image: z.string(),
+  imageAlt: z.string(),
+  badge: z.string().optional(),
+  icon: z.string().optional(),
+  title: z.string(),
+  paragraph1: z.string(),
+  paragraph2: z.string(),
+}).optional();
+
 // CTA section schema
 const ctaSectionSchema = z.object({
   title: z.string(),
@@ -78,6 +89,9 @@ const pageContentSchema = z.object({
   
   // Optional: Cards/features data (for sections with structured components)
   cards: z.array(cardSchema).optional(),
+  
+  // Optional: Advocacy section data
+  advocacy: advocacySchema,
   
   // Optional: CTA section data
   cta: ctaSectionSchema,
